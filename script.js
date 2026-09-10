@@ -21,7 +21,7 @@ const priceHistory = {};
 for (let sym in CRYPTO_MARKET) { priceHistory[sym] = [CRYPTO_MARKET[sym].price]; }
 
 const SERVER_HOST = window.location.hostname || 'localhost';
-const SERVER_URL = `http://${SERVER_HOST}:3000`;
+const SERVER_URL = `const SERVER_URL = 'https://crypto-sim1-1.onrender.com';`;
 const APP_VERSION = '20260910-21';
 const MINING_REWARD_EUR_PER_HOUR = 100;
 const RIG_COST_USD = 100;
