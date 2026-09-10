@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brave Wallet Clone</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- AUTHENTICATION -->
+    <div id="auth-screen" class="auth-wrapper">
+        <div class="auth-container">
+            <div class="brand-logo">
+                <svg viewBox="0 0 32 32" width="40" height="40" fill="none"><path d="M16 2L4 7v9c0 7.7 5.1 14.9 12 16 6.9-1.1 12-8.3 12-16V7L16 2z" fill="#ff5000"/><path d="M16 6l-8 3.5v6.5c0 5.2 3.4 10.1 8 11 4.6-.9 8-5.8 8-11V9.5L16 6z" fill="#FFF"/><circle cx="16" cy="16" r="4" fill="#ff5000"/></svg>
+                <h2>wallet</h2>
+            </div>
+            
+            <form id="login-form">
+                <input type="text" id="login-username" class="wallet-input" placeholder="Username" required>
+                <input type="password" id="login-password" class="wallet-input" placeholder="Password" required>
+                <button type="submit" class="btn-primary">Unlock</button>
+                <a href="#" id="show-signup" class="auth-link">Create a new wallet</a>
+            </form>
+
+            <form id="signup-form" style="display: none;">
+                <input type="text" id="signup-username" class="wallet-input" placeholder="Choose Username" required>
+                <input type="password" id="signup-password" class="wallet-input" placeholder="Create Password" required>
+                <button type="submit" class="btn-primary">Create Wallet</button>
+                <a href="#" id="show-login" class="auth-link">Already have a wallet?</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- MAIN APP -->
+    <div id="app-container" class="app-window" style="display: none;">
+        
+        <!-- SIDEBAR -->
+        <nav class="sidebar">
+            <div class="sidebar-brand">
+                <svg viewBox="0 0 32 32" width="24" height="24" fill="none"><path d="M16 2L4 7v9c0 7.7 5.1 14.9 12 16 6.9-1.1 12-8.3 12-16V7L16 2z" fill="#ff5000"/><path d="M16 6l-8 3.5v6.5c0 5.2 3.4 10.1 8 11 4.6-.9 8-5.8 8-11V9.5L16 6z" fill="#FFF"/><circle cx="16" cy="16" r="3.5" fill="#ff5000"/></svg>
+                <span>wallet</span>
+            </div>
+
+            <div class="nav-links">
+                <a href="#" class="nav-item active" data-view="portfolio"><span class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 16v-4M12 16V8M17 16v-7"/></svg></span> Portfolio</a>
+                <a href="#" class="nav-item" data-view="accounts"><span class="icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.5-5 6-5s6 2 6 5M16 11a3 3 0 1 0 0-6M16 15c3 0 5 2 5 5"/></svg></span> Accounts</a>
+                <a href="#" class="nav-item" data-view="explore"><span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z"/></svg></span> Explore</a>
+                <a href="#" class="nav-item" data-view="miner"><span class="icon"><svg viewBox="0 0 24 24"><path d="m14 4-8 8 4 4 8-8-4-4ZM4 20l4-4M15 13l5 5M17 3l4 4"/></svg></span> Cloud Miner</a>
+                <a href="#" class="nav-item" data-view="send"><span class="icon"><svg viewBox="0 0 24 24"><path d="m4 4 16 8-16 8 3-8-3-8Z"/><path d="M7 12h13"/></svg></span> Send</a>
+                <a href="#" class="nav-item" data-view="gifts"><span class="icon"><svg viewBox="0 0 24 24"><path d="M4 10h16v10H4zM3 7h18v3H3zM12 7v13M12 7H8.5a2.5 2.5 0 1 1 2.5-2.5V7ZM12 7h3.5A2.5 2.5 0 1 0 13 4.5V7Z"/></svg></span> Gifts</a>
+                <a href="#" class="nav-item" data-view="trading"><span class="icon"><svg viewBox="0 0 24 24"><path d="M4 17 9 11l4 3 7-8"/><path d="M16 6h4v4"/></svg></span> Trading</a>
+                <a href="#" class="nav-item" data-view="settings"><span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.8 1.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-2.6V20a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1-1.8-1.8.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H6v-2.6h.2a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1 1.8-1.8.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.6V5h2.6v.2a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1 1.8 1.8-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v2.6h-.2a1.7 1.7 0 0 0-1.6 1Z"/></svg></span> Settings</a>
+            </div>
+            <button id="logout-btn" class="nav-item logout"><span class="icon"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span> Lock Wallet</button>
+        </nav>
+
+        <!-- CONTENT AREA -->
+        <main class="main-content">
+            
+            <!-- PORTFOLIO -->
+            <section id="view-portfolio" class="view-section">
+                <div class="top-header">
+                    <h1>Portfolio</h1>
+                    <button class="icon-btn" onclick="alert('Wallet network configuration is coming soon!')">+</button>
+                </div>
+
+                <div class="portfolio-hero">
+                    <h2 class="total-balance">€<span id="portfolio-total">0.00</span></h2>
+                    <p class="pink-text" id="get-started-text">Let's get started</p>
+                </div>
+
+                <div class="action-cards">
+                    <div class="action-card" onclick="switchTab('miner')">
+                        <div class="ac-icon"><svg viewBox="0 0 24 24"><path d="m14 4-8 8 4 4 8-8-4-4ZM4 20l4-4M15 13l5 5M17 3l4 4"/></svg></div>
+                        <div class="ac-text">
+                            <h3>Mine Crypto</h3>
+                            <p>Generate passive tokens</p>
+                        </div>
+                    </div>
+                    <div class="action-card" onclick="switchTab('trading')">
+                        <div class="ac-icon"><svg viewBox="0 0 24 24"><path d="M7 7h11l-3-3M17 17H6l3 3M18 7a6 6 0 0 1 1 7M6 17a6 6 0 0 1-1-7"/></svg></div>
+                        <div class="ac-text">
+                            <h3>Trade crypto</h3>
+                            <p>Trade assets instantly</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="assets-panel">
+                    <div class="tabs-wrapper">
+                        <div class="segmented-tabs">
+                            <button class="tab active">Assets</button>
+                            <button class="tab" onclick="alert('You do not own any NFTs yet.')">NFTs</button>
+                            <button class="tab" onclick="alert('No recent activity found.')">Activity</button>
+                        </div>
+                    </div>
+
+                    <div class="assets-header">
+                        <h3>Assets</h3>
+                        <div class="search-filter">
+                            <div class="search-bar">
+                                <span class="search-icon">🔍</span>
+                                <input type="text" id="portfolio-search" placeholder="Search assets">
+                            </div>
+                            <button class="icon-btn-small" onclick="alert('Filter options coming soon!')">≡</button>
+                        </div>
+                    </div>
+                    <div id="portfolio-asset-list" class="asset-list"></div>
+                </div>
+            </section>
+
+            <!-- ASSET DETAIL VIEW WITH LIVE CHART -->
+            <section id="view-asset-detail" class="view-section" style="display: none;">
+                <button class="back-link" onclick="switchTab('portfolio')">← Back to Portfolio</button>
+                
+                <div class="asset-detail-card">
+                    <div class="adc-header">
+                        <div class="adc-left">
+                            <img id="detail-icon" src="" class="ar-icon" style="width: 48px; height: 48px;">
+                            <div>
+                                <h1 id="detail-name" style="margin-bottom: 0;">Ethereum</h1>
+                                <p id="detail-network" style="color: var(--text-secondary); font-size: 0.9rem;">ETH on Ethereum Mainnet</p>
+                            </div>
+                        </div>
+                        <div class="adc-right">
+                            <h2 id="detail-price">€0.00</h2>
+                            <p id="detail-change" class="trend-up">+0.00%</p>
+                        </div>
+                    </div>
+
+                    <div class="chart-area">
+                        <div class="time-selector">
+                            <button class="time-btn">Live ▾</button>
+                        </div>
+                        <div id="live-chart-container" style="height: 100px; width: 100%; display: flex; align-items: flex-end;"></div>
+                    </div>
+
+                    <div class="detail-actions">
+                        <div class="action-circle-wrap" onclick="switchTab('trading')"><button class="round-action-btn" aria-label="Buy"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button><span>Buy</span></div>
+                        <div class="action-circle-wrap" onclick="switchTab('send')"><button class="round-action-btn" aria-label="Send"><svg viewBox="0 0 24 24"><path d="m4 4 16 8-16 8 3-8-3-8ZM7 12h13"/></svg></button><span>Send</span></div>
+                        <div class="action-circle-wrap" onclick="switchTab('trading')"><button class="round-action-btn" aria-label="Trade"><svg viewBox="0 0 24 24"><path d="M4 17 9 11l4 3 7-8"/><path d="M16 6h4v4"/></svg></button><span>Trade</span></div>
+                    </div>
+                </div>
+
+                <div class="assets-panel" style="margin-top: 24px;">
+                    <div class="tabs-wrapper">
+                        <div class="segmented-tabs">
+                            <button class="tab active">Accounts</button>
+                            <button class="tab" onclick="alert('No transactions found for this asset.')">Transactions</button>
+                        </div>
+                    </div>
+                    <div id="detail-account-balance" class="center-text" style="padding: 40px 0; color: var(--text-secondary);">
+                    </div>
+                </div>
+            </section>
+
+            <!-- EXPLORE -->
+            <section id="view-explore" class="view-section" style="display: none;">
+                <div class="explore-container">
+                    <h1>Explore</h1>
+                    <div class="table-controls">
+                        <button class="dropdown-btn">All Assets ▾</button>
+                        <div class="search-bar expand">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" placeholder="Search">
+                        </div>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Assets</th>
+                                <th>Price</th>
+                                <th>24hr</th>
+                                <th>Chart</th>
+                                <th class="right-align">Trade</th>
+                            </tr>
+                        </thead>
+                        <tbody id="explore-table-body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SETTINGS / DELETE ACCOUNT -->
+            <section id="view-settings" class="view-section form-view" style="display: none;">
+                <h1>Settings</h1>
+                <div class="form-panel profile-panel">
+                    <h2>Profile</h2>
+                    <label>Display name</label>
+                    <input id="profile-name" class="wallet-input" maxlength="32" placeholder="Your name">
+                    <label>Profile picture</label>
+                    <input id="profile-avatar-file" class="wallet-input" type="file" accept="image/*">
+                    <img id="profile-avatar-preview" class="profile-preview" alt="Profile preview">
+                    <button id="save-profile-btn" type="button" class="btn-primary">Save Profile</button>
+                </div>
+                <div class="form-panel" style="border-color: #3f1a1a;">
+                    <h2 style="color: var(--trend-red); margin-bottom: 8px;">Danger Zone</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 24px;">Deleting your account is permanent. All simulated crypto balances will be erased forever.</p>
+                    <button id="delete-account-btn" class="btn-primary" style="background-color: var(--trend-red);">Delete My Account</button>
+                </div>
+            </section>
+
+            <!-- SEND / SWAP / MINER -->
+            <section id="view-send" class="view-section form-view" style="display: none;">
+                <h1>Send Crypto</h1>
+                <div class="form-panel">
+                    <label>Recipient</label>
+                    <select id="send-recipient" class="wallet-input"></select>
+                    <label>Asset</label>
+                    <select id="send-asset-select" class="wallet-input"></select>
+                    <label>Amount</label>
+                    <div class="amount-control">
+                        <button type="button" id="send-minus" class="stepper-btn">−</button>
+                        <input type="number" id="send-amount" class="wallet-input" placeholder="0.0" min="0" step="0.0001">
+                        <button type="button" id="send-plus" class="stepper-btn">+</button>
+                    </div>
+                    <p id="send-available" class="sub-text">Available: 0</p>
+                    <button id="confirm-send-btn" class="btn-primary mt-4">Review Send</button>
+                </div>
+            </section>
+
+            <section id="view-gifts" class="view-section form-view" style="display: none;">
+                <h1>Gifts</h1>
+                <div id="gifts-list" class="gift-list"></div>
+            </section>
+
+            <section id="view-trading" class="view-section form-view" style="display: none;">
+                <h1>Trading</h1>
+                <div class="form-panel">
+                    <div class="trading-market-head">
+                        <div>
+                            <label>Market</label>
+                            <select id="trading-market-select" class="wallet-input"></select>
+                        </div>
+                        <strong id="trading-market-price">€0.00</strong>
+                    </div>
+                    <div id="trading-chart" class="trading-chart"></div>
+                    <div class="trading-orderbook">
+                        <div class="orderbook-title">Order Book <span>Live market depth</span></div>
+                        <div class="orderbook-row orderbook-head"><span>Amount</span><span>Price</span></div>
+                        <div class="orderbook-row ask"><span>0.0420</span><span>€78,802.10</span></div>
+                        <div class="orderbook-row ask"><span>0.1180</span><span>€78,796.40</span></div>
+                        <div class="orderbook-row last-price"><span>Last price</span><strong id="trading-order-price">€0.00</strong></div>
+                        <div class="orderbook-row bid"><span>0.0910</span><span>€78,774.20</span></div>
+                        <div class="orderbook-row bid"><span>0.1840</span><span>€78,768.60</span></div>
+                    </div>
+                    <div class="trade-side-buttons">
+                        <button type="button" id="trade-buy-btn" class="trade-side active">Buy</button>
+                        <button type="button" id="trade-sell-btn" class="trade-side">Sell</button>
+                    </div>
+                    <label>Crypto to trade</label>
+                    <div class="flex-row">
+                        <select id="swap-from-coin" class="wallet-input"></select>
+                    </div>
+                    <label class="mt-4">Amount</label>
+                    <div class="amount-control trade-amount-control">
+                        <button type="button" id="trade-minus" class="stepper-btn">−</button>
+                        <input type="number" id="swap-from-amount" class="wallet-input" placeholder="0.0" min="0" step="0.00000001">
+                        <button type="button" id="trade-plus" class="stepper-btn">+</button>
+                    </div>
+                    <p id="trade-available" class="sub-text">Available: 0</p>
+                    <input type="hidden" id="swap-to-coin">
+                    <input type="hidden" id="swap-to-amount">
+                    <button id="confirm-swap-btn" class="btn-primary mt-4">Execute Trade</button>
+                </div>
+            </section>
+
+            <section id="view-miner" class="view-section form-view" style="display: none;">
+                <h1>Cloud Mining Farm</h1>
+                <div class="form-panel center-text">
+                    <h2 id="miner-hashrate">0.00 <small>MH/s</small></h2>
+                    <p id="miner-status" class="sub-text mb-4">Status: Offline</p>
+                    <p id="miner-rate" class="sub-text mb-4">Estimated reward: Select a coin</p>
+                    <p>Active Mining Rigs: <strong id="miner-count-display">1</strong></p>
+                    <p class="mb-4">Session Mined: <strong id="session-mined-amount">0.0000</strong></p>
+                    <p class="sub-text mb-4">Rewards are based on the selected coin price and update every second.</p>
+                    
+                    <div style="margin-bottom: 24px;">
+                        <label style="display:inline-block; margin-right:10px; color: var(--text-secondary);">Target Coin:</label>
+                        <select id="miner-target-coin" class="wallet-input" style="width: 200px; display:inline-block;"></select>
+                    </div>
+                    <p class="sub-text mb-4">The rig costs $100 worth of your selected target crypto. No second payment currency.</p>
+
+                    <div style="display: flex; gap: 12px; justify-content: center;">
+                        <button type="button" id="toggle-miner-btn" class="btn-primary" style="flex: 1;">Start Miner</button>
+                        <button type="button" id="buy-miner-btn" class="btn-primary" style="flex: 1; background-color: var(--accent-purple);">Buy Rig</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="view-accounts" class="view-section" style="display: none;">
+                <h1>Accounts</h1>
+                <div class="account-legend" aria-label="Accounts status legend">
+                    <strong>Account activity</strong>
+                    <span><i class="legend-swatch legend-mining"></i>Gold border: currently mining</span>
+                    <span><i class="legend-swatch legend-rise"></i>Green glow: balance increased</span>
+                </div>
+                <div id="accounts-list" class="mt-4"></div>
+            </section>
+        </main>
+    </div>
+
+    <div id="update-banner" class="update-banner" role="status" aria-live="polite" hidden>
+        <span>A new update is available.</span>
+        <button id="apply-update-btn" type="button">Update now</button>
+    </div>
+
+    <script src="script.js?v=20260910-21"></script>
+</body>
+</html>
